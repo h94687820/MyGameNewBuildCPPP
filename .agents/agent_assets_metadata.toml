@@ -1,0 +1,9 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "ZDITi7phQjjPvAkh6msf_"
+uri = "file://attached_assets/Downtown_City_MegaKit_merged.zip"
+type = "unspecified"
+title = "Downtown City MegaKit — merged"
+description = "حزمة موحدة تحتوي على نموذج المدينة وجميع ملفات الخامات المرفقة."
