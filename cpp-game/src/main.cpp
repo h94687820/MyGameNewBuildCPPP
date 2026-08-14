@@ -50,14 +50,21 @@ Vector3 NormalizeXZ(Vector3 value)
 
 bool IsControlHeld(const ControlButton& button)
 {
-    return IsMouseButtonDown(MOUSE_BUTTON_LEFT) &&
-           CheckCollisionPointRec(GetMousePosition(), button.bounds);
-}
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) &&
+        CheckCollisionPointRec(GetMousePosition(), button.bounds))
+    {
+        return true;
+    }
 
-bool IsControlPressed(const ControlButton& button)
-{
-    return IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
-           CheckCollisionPointRec(GetMousePosition(), button.bounds);
+    const int touchCount = GetTouchPointCount();
+    for (int touchIndex = 0; touchIndex < touchCount; ++touchIndex)
+    {
+        if (CheckCollisionPointRec(GetTouchPosition(touchIndex), button.bounds))
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 void AddAxisFromKey(float& axis, KeyboardKey negative, KeyboardKey positive)
@@ -134,7 +141,7 @@ void DrawControls(
     const ControlButton& right)
 {
     DrawRectangleRounded({screenWidth - 236.0F, screenHeight - 196.0F, 212.0F, 178.0F}, 0.08F, 8, {8, 14, 25, 205});
-    DrawText("MOVE", screenWidth - 204, screenHeight - 184, 16, {178, 201, 227, 255});
+    DrawText("MOVE / TOUCH", screenWidth - 204, screenHeight - 184, 16, {178, 201, 227, 255});
 
     DrawControlButton(up, IsControlHeld(up) || IsKeyDown(KEY_W) || IsKeyDown(KEY_UP));
     DrawControlButton(down, IsControlHeld(down) || IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN));
