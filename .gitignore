@@ -2,6 +2,7 @@
 
 # compiled output
 dist
+cpp-game/build/
 tmp
 out-tsc
 *.tsbuildinfo
