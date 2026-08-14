@@ -1,0 +1,21 @@
+# ninja log v6
+1	60	1786725016648167171	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-mkdir	9d614aaadd069c7b
+1	60	1786725016648167171	/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-mkdir	9d614aaadd069c7b
+60	28283	1786725044872167171	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	216c9dee137c9c17
+60	28283	1786725044872167171	/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	216c9dee137c9c17
+28283	28342	1786725044876167171	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-update	1278cab80cd15beb
+28283	28342	1786725044876167171	/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-update	1278cab80cd15beb
+28342	28396	1786725044984167171	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	a7e5f972ccdee8fc
+28342	28396	1786725044984167171	/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	a7e5f972ccdee8fc
+28397	28450	1786725045040167171	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	624e0adb92798278
+28397	28450	1786725045040167171	/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	624e0adb92798278
+28450	28505	1786725045096167171	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	64983cab3d0d50e8
+28450	28505	1786725045096167171	/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	64983cab3d0d50e8
+28505	28558	1786725045148167171	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	e37b37fc61e43c69
+28505	28558	1786725045148167171	/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	e37b37fc61e43c69
+28559	28607	1786725045196167171	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	86c99dcc41bfd77d
+28559	28607	1786725045196167171	/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	86c99dcc41bfd77d
+28607	28683	1786725045272167171	CMakeFiles/raylib-populate-complete	cb5a6ac770c40d9f
+28607	28683	1786725045272167171	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	cb5a6ac770c40d9f
+28607	28683	1786725045272167171	/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-subbuild/CMakeFiles/raylib-populate-complete	cb5a6ac770c40d9f
+28607	28683	1786725045272167171	/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	cb5a6ac770c40d9f

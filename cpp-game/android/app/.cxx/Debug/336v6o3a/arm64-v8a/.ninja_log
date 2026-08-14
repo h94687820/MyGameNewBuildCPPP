@@ -1,0 +1,11 @@
+# ninja log v6
+5	393	1786725045858639689	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rshapes.c.o	304d3a37dd4d0a1e
+394	463	1786725046247418985	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue/android_native_app_glue.c.o	e8745e5e5f859c8c
+6	531	1786725045859871575	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtext.c.o	c441ba5d773aebe9
+2	943	1786725045855660235	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rcore.c.o	c88795c377d213e5
+464	956	1786725046316349283	CMakeFiles/main.dir/home/runner/workspace/cpp-game/src/main.cpp.o	c9c1c18f319ec614
+2	1533	1786725045855861519	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rmodels.c.o	4003f48e72c70e5c
+7	2213	1786725045860107659	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtextures.c.o	4239e3e025aa55ed
+2	2627	1786725045852167171	_deps/raylib-build/raylib/CMakeFiles/raylib.dir/raudio.c.o	ae1ada04c54ae589
+2627	2873	1786725048476167171	_deps/raylib-build/raylib/libraylib.a	5d5891758d28d6a3
+2873	2980	1786725048720167171	/home/runner/workspace/cpp-game/android/app/build/intermediates/cxx/Debug/336v6o3a/obj/arm64-v8a/libmain.so	d559773a8b8d58f8

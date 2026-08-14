@@ -1,0 +1,48 @@
+{
+  "buildFiles": [
+    "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/CMakeLists.txt",
+    "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/CMakeLists.txt",
+    "/home/runner/workspace/cpp-game/android/app/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/nix/store/mrkrlw6g3a7gp9a50dawfzirzhw8945v-ninja-1.12.1/bin/ninja",
+      "-C",
+      "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/nix/store/mrkrlw6g3a7gp9a50dawfzirzhw8945v-ninja-1.12.1/bin/ninja",
+    "-C",
+    "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "main::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "main",
+      "output": "/home/runner/workspace/cpp-game/android/app/build/intermediates/cxx/Debug/336v6o3a/obj/arm64-v8a/libmain.so",
+      "runtimeFiles": []
+    },
+    "raylib::@4dc3a4644cf4ded08c01": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "raylib",
+      "output": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-build/raylib/libraylib.a"
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

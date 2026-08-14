@@ -7,3 +7,10 @@ uri = "file://attached_assets/Downtown_City_MegaKit_merged.zip"
 type = "unspecified"
 title = "Downtown City MegaKit — merged"
 description = "حزمة موحدة تحتوي على نموذج المدينة وجميع ملفات الخامات المرفقة."
+
+[[outputs]]
+id = "625skQSUvUajnLztGi-_X"
+uri = "file://cpp-game/android/app/build/outputs/apk/debug/app-debug.apk"
+type = "unspecified"
+title = "Third-Person Cube Android APK"
+description = "Debug APK for Android arm64-v8a. Touch movement buttons are included; install it on an Android phone for testing."

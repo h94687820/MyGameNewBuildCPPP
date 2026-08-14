@@ -1,0 +1,50 @@
+[
+{
+  "directory": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a",
+  "command": "/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android29 --sysroot=/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -Dmain_EXPORTS -I/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -frtti -fexceptions -fno-limit-debug-info  -std=c++17 -fPIC -Wall -Wextra -Wpedantic -o CMakeFiles/main.dir/home/runner/workspace/cpp-game/src/main.cpp.o -c /home/runner/workspace/cpp-game/src/main.cpp",
+  "file": "/home/runner/workspace/cpp-game/src/main.cpp",
+  "output": "CMakeFiles/main.dir/home/runner/workspace/cpp-game/src/main.cpp.o"
+},
+{
+  "directory": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a",
+  "command": "/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue -I/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o _deps/raylib-build/raylib/CMakeFiles/raylib.dir/raudio.c.o -c /home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/raudio.c",
+  "file": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/raudio.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/raudio.c.o"
+},
+{
+  "directory": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a",
+  "command": "/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue -I/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o _deps/raylib-build/raylib/CMakeFiles/raylib.dir/rcore.c.o -c /home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/rcore.c",
+  "file": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/rcore.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rcore.c.o"
+},
+{
+  "directory": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a",
+  "command": "/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue -I/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o _deps/raylib-build/raylib/CMakeFiles/raylib.dir/rmodels.c.o -c /home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/rmodels.c",
+  "file": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/rmodels.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rmodels.c.o"
+},
+{
+  "directory": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a",
+  "command": "/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue -I/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o _deps/raylib-build/raylib/CMakeFiles/raylib.dir/rshapes.c.o -c /home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/rshapes.c",
+  "file": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/rshapes.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rshapes.c.o"
+},
+{
+  "directory": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a",
+  "command": "/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue -I/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o _deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtext.c.o -c /home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/rtext.c",
+  "file": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/rtext.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtext.c.o"
+},
+{
+  "directory": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a",
+  "command": "/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue -I/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o _deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtextures.c.o -c /home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/rtextures.c",
+  "file": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src/rtextures.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtextures.c.o"
+},
+{
+  "directory": "/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a",
+  "command": "/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/tmp/android-ndk/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue -I/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a/_deps/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o _deps/raylib-build/raylib/CMakeFiles/raylib.dir/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue/android_native_app_glue.c.o -c /tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue/android_native_app_glue.c",
+  "file": "/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue/android_native_app_glue.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/tmp/android-ndk/android-ndk-r25c/sources/android/native_app_glue/android_native_app_glue.c.o"
+}
+]

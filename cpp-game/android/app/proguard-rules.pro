@@ -1,0 +1,1 @@
+# The game is a NativeActivity; no Java shrinking rules are needed for debug APKs.

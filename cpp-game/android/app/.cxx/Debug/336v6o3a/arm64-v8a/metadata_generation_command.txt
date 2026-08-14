@@ -1,0 +1,19 @@
+                        -H/home/runner/workspace/cpp-game/android/app/src/main/cpp
+-DCMAKE_SYSTEM_NAME=Android
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-DCMAKE_SYSTEM_VERSION=29
+-DANDROID_PLATFORM=android-29
+-DANDROID_ABI=arm64-v8a
+-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a
+-DANDROID_NDK=/tmp/android-ndk/android-ndk-r25c
+-DCMAKE_ANDROID_NDK=/tmp/android-ndk/android-ndk-r25c
+-DCMAKE_TOOLCHAIN_FILE=/tmp/android-ndk/android-ndk-r25c/build/cmake/android.toolchain.cmake
+-DCMAKE_MAKE_PROGRAM=/nix/store/mrkrlw6g3a7gp9a50dawfzirzhw8945v-ninja-1.12.1/bin/ninja
+-DCMAKE_CXX_FLAGS=-std=c++17 -frtti -fexceptions
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/runner/workspace/cpp-game/android/app/build/intermediates/cxx/Debug/336v6o3a/obj/arm64-v8a
+-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/home/runner/workspace/cpp-game/android/app/build/intermediates/cxx/Debug/336v6o3a/obj/arm64-v8a
+-DCMAKE_BUILD_TYPE=Debug
+-B/home/runner/workspace/cpp-game/android/app/.cxx/Debug/336v6o3a/arm64-v8a
+-GNinja
+                        Build command args: []
+                        Version: 2

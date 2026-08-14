@@ -18,8 +18,30 @@ cmake --build build
 
 الكاميرا تتبع المكعب من الخلف بمنظور الشخص الثالث، والمكعب حجمه `1 × 1 × 1`.
 
-## Android
+## Android APK
 
-كود الحركة يدعم نقاط اللمس في raylib، لذلك يمكن استخدام الأزرار نفسها
-بعد بناء المشروع كحزمة Android APK. إعداد Android SDK/NDK وملف APK
-هو خطوة التغليف التالية، أما النموذج الحالي فيُجمع كنسخة سطح مكتب للاختبار.
+مشروع Android موجود داخل `android/`. يستخدم CMake وGradle وraylib، ويبني
+نسخة `arm64-v8a` لهواتف Android الحديثة. أزرار W A S D داخل اللعبة تقرأ
+اللمس الحقيقي عبر raylib، مع بقاء لوحة المفاتيح والماوس متاحين على الكمبيوتر.
+
+بعد تثبيت Android SDK وNDK، اضبط المسارين ثم شغّل:
+
+```bash
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+export ANDROID_NDK_ROOT="$ANDROID_SDK_ROOT/ndk/25.2.9519653"
+./build_android.sh
+```
+
+ملف APK الناتج:
+
+```text
+android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+لتثبيته على هاتف متصل مع تفعيل USB debugging:
+
+```bash
+adb install -r android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+ملف `android/local.properties` يُنشأ تلقائيًا ولا يجب حفظه في Git.
