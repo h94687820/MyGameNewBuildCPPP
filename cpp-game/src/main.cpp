@@ -2,8 +2,10 @@
 #include "raymath.h"
 
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <string>
+#include <vector>
 
 namespace
 {
@@ -14,6 +16,8 @@ constexpr float playerHalfHeight = playerSide * 0.5F;
 constexpr float moveSpeed = 5.0F;
 constexpr float cameraDistance = 7.0F;
 constexpr float cameraHeight = 3.4F;
+constexpr float cityChunkSize = 42.0F;
+constexpr int cityChunkRadius = 1;
 
 struct MovementInput
 {
@@ -31,6 +35,30 @@ struct ControlButton
 {
     Rectangle bounds{};
     const char* label = "";
+};
+
+struct BoundsXZ
+{
+    float minX = 0.0F;
+    float maxX = 0.0F;
+    float minZ = 0.0F;
+    float maxZ = 0.0F;
+};
+
+struct BuildingInstance
+{
+    Model* model = nullptr;
+    Vector3 position{};
+    float scale = 1.0F;
+    float rotation = 0.0F;
+    BoundsXZ collision{};
+};
+
+struct CityChunk
+{
+    int gridX = 0;
+    int gridZ = 0;
+    std::vector<BuildingInstance> buildings;
 };
 
 float LengthSquared(Vector3 value)
@@ -149,6 +177,289 @@ void DrawControls(
     DrawControlButton(right, IsControlHeld(right) || IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT));
 }
 
+std::string FindCityAsset(const char* fileName)
+{
+    const std::array<std::string, 3> roots = {
+        "android/app/src/main/assets/city/",
+        "city/",
+        "assets/city/",
+    };
+
+    for (const std::string& root : roots)
+    {
+        const std::string candidate = root + fileName;
+        if (FileExists(candidate.c_str()))
+        {
+            return candidate;
+        }
+    }
+
+    // Android's asset manager exposes the app assets from the "city" folder.
+    return std::string("city/") + fileName;
+}
+
+bool IsUsableModel(const Model& model)
+{
+    return model.meshCount > 0 && model.materialCount > 0;
+}
+
+struct CityAssets
+{
+    Model largeBuilding{};
+    Model mediumBuilding{};
+    Model smallBuilding{};
+    Model street{};
+    Model intersection{};
+    Model sidewalk{};
+    bool ready = false;
+
+    bool Load()
+    {
+        struct AssetToLoad
+        {
+            Model* model;
+            const char* fileName;
+            const char* label;
+        };
+
+        const std::array<AssetToLoad, 6> assets = {{
+            {&largeBuilding, "Building_Large_2.gltf", "large building"},
+            {&mediumBuilding, "Building_Medium_2_001.gltf", "medium building"},
+            {&smallBuilding, "Building_Small_1.gltf", "small building"},
+            {&street, "Street_2Lane.gltf", "street"},
+            {&intersection, "Street_4WayIntersection.gltf", "intersection"},
+            {&sidewalk, "Sidewalk_Straight_3m.gltf", "sidewalk"},
+        }};
+
+        ready = true;
+        for (const AssetToLoad& asset : assets)
+        {
+            const std::string path = FindCityAsset(asset.fileName);
+            *asset.model = LoadModel(path.c_str());
+            if (!IsUsableModel(*asset.model))
+            {
+                TraceLog(LOG_WARNING, "City asset failed to load: %s (%s)", asset.label, path.c_str());
+                ready = false;
+            }
+            else
+            {
+                TraceLog(LOG_INFO, "City asset loaded: %s", path.c_str());
+            }
+        }
+        return ready;
+    }
+
+    void Unload()
+    {
+        Model* models[] = {
+            &largeBuilding,
+            &mediumBuilding,
+            &smallBuilding,
+            &street,
+            &intersection,
+            &sidewalk,
+        };
+
+        for (Model* model : models)
+        {
+            if (IsUsableModel(*model))
+            {
+                UnloadModel(*model);
+            }
+        }
+    }
+};
+
+BoundsXZ TransformBounds(
+    BoundsXZ localBounds,
+    Vector3 position,
+    float scale,
+    float rotationDegrees)
+{
+    const float radians = rotationDegrees * DEG2RAD;
+    const float cosine = std::cos(radians);
+    const float sine = std::sin(radians);
+    BoundsXZ result{
+        position.x + 100000.0F,
+        position.x - 100000.0F,
+        position.z + 100000.0F,
+        position.z - 100000.0F,
+    };
+
+    const float xs[] = {localBounds.minX, localBounds.maxX};
+    const float zs[] = {localBounds.minZ, localBounds.maxZ};
+    for (float x : xs)
+    {
+        for (float z : zs)
+        {
+            const float rotatedX = (x * cosine - z * sine) * scale + position.x;
+            const float rotatedZ = (x * sine + z * cosine) * scale + position.z;
+            result.minX = std::min(result.minX, rotatedX);
+            result.maxX = std::max(result.maxX, rotatedX);
+            result.minZ = std::min(result.minZ, rotatedZ);
+            result.maxZ = std::max(result.maxZ, rotatedZ);
+        }
+    }
+    return result;
+}
+
+class CityWorld
+{
+public:
+    explicit CityWorld(CityAssets& assets)
+        : assets_(assets)
+    {
+    }
+
+    void Update(Vector3 playerPosition)
+    {
+        const int nextGridX = static_cast<int>(std::floor(playerPosition.x / cityChunkSize));
+        const int nextGridZ = static_cast<int>(std::floor(playerPosition.z / cityChunkSize));
+        if (nextGridX == centerGridX_ && nextGridZ == centerGridZ_ && !chunks_.empty())
+        {
+            return;
+        }
+
+        centerGridX_ = nextGridX;
+        centerGridZ_ = nextGridZ;
+        chunks_.clear();
+
+        // Keep a compact 3x3 neighborhood around the player. The asset models
+        // are shared, while these lightweight chunk instances are rebuilt as
+        // the player crosses a 42m boundary.
+        for (int z = -cityChunkRadius; z <= cityChunkRadius; ++z)
+        {
+            for (int x = -cityChunkRadius; x <= cityChunkRadius; ++x)
+            {
+                LoadChunk(centerGridX_ + x, centerGridZ_ + z);
+            }
+        }
+    }
+
+    bool Collides(Vector3 candidate, float radius) const
+    {
+        for (const CityChunk& chunk : chunks_)
+        {
+            for (const BuildingInstance& building : chunk.buildings)
+            {
+                if (candidate.x + radius > building.collision.minX &&
+                    candidate.x - radius < building.collision.maxX &&
+                    candidate.z + radius > building.collision.minZ &&
+                    candidate.z - radius < building.collision.maxZ)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    void Draw() const
+    {
+        DrawPlane({0.0F, -0.02F, 0.0F}, {cityChunkSize * 3.0F, cityChunkSize * 3.0F}, {37, 47, 57, 255});
+
+        for (const CityChunk& chunk : chunks_)
+        {
+            const Vector3 center{
+                static_cast<float>(chunk.gridX) * cityChunkSize,
+                0.15F,
+                static_cast<float>(chunk.gridZ) * cityChunkSize,
+            };
+
+            DrawModelEx(assets_.intersection, center, {0.0F, 1.0F, 0.0F}, 0.0F, {1.0F, 1.0F, 1.0F}, WHITE);
+            DrawModelEx(assets_.street, {center.x, 0.15F, center.z - 15.0F}, {0.0F, 1.0F, 0.0F}, 0.0F, {1.0F, 1.0F, 1.0F}, WHITE);
+            DrawModelEx(assets_.street, {center.x, 0.15F, center.z + 15.0F}, {0.0F, 1.0F, 0.0F}, 0.0F, {1.0F, 1.0F, 1.0F}, WHITE);
+            DrawModelEx(assets_.street, {center.x - 15.0F, 0.15F, center.z}, {0.0F, 1.0F, 0.0F}, 90.0F, {1.0F, 1.0F, 1.0F}, WHITE);
+            DrawModelEx(assets_.street, {center.x + 15.0F, 0.15F, center.z}, {0.0F, 1.0F, 0.0F}, 90.0F, {1.0F, 1.0F, 1.0F}, WHITE);
+
+            DrawModelEx(assets_.sidewalk, {center.x - 5.0F, 0.15F, center.z - 5.0F}, {0.0F, 1.0F, 0.0F}, 0.0F, {1.0F, 1.0F, 1.0F}, WHITE);
+            DrawModelEx(assets_.sidewalk, {center.x + 5.0F, 0.15F, center.z + 5.0F}, {0.0F, 1.0F, 0.0F}, 90.0F, {1.0F, 1.0F, 1.0F}, WHITE);
+
+            for (const BuildingInstance& building : chunk.buildings)
+            {
+                DrawModelEx(
+                    *building.model,
+                    building.position,
+                    {0.0F, 1.0F, 0.0F},
+                    building.rotation,
+                    {building.scale, building.scale, building.scale},
+                    WHITE);
+            }
+        }
+    }
+
+    int ActiveChunkCount() const
+    {
+        return static_cast<int>(chunks_.size());
+    }
+
+private:
+    void LoadChunk(int gridX, int gridZ)
+    {
+        CityChunk chunk;
+        chunk.gridX = gridX;
+        chunk.gridZ = gridZ;
+        const Vector3 origin{
+            static_cast<float>(gridX) * cityChunkSize,
+            0.0F,
+            static_cast<float>(gridZ) * cityChunkSize,
+        };
+
+        AddBuilding(
+            chunk,
+            assets_.largeBuilding,
+            {-9.33F, 11.33F, -16.33F, 0.33F},
+            {origin.x - 14.0F, 0.0F, origin.z - 4.0F},
+            0.65F,
+            0.0F);
+        AddBuilding(
+            chunk,
+            assets_.mediumBuilding,
+            {-7.53F, 7.53F, -12.49F, 0.57F},
+            {origin.x + 10.0F, 0.0F, origin.z - 4.0F},
+            0.70F,
+            0.0F);
+        AddBuilding(
+            chunk,
+            assets_.largeBuilding,
+            {-9.33F, 11.33F, -16.33F, 0.33F},
+            {origin.x - 12.0F, 0.0F, origin.z + 4.0F},
+            0.65F,
+            180.0F);
+        AddBuilding(
+            chunk,
+            assets_.smallBuilding,
+            {-7.23F, 5.23F, -12.23F, 0.23F},
+            {origin.x + 10.0F, 0.0F, origin.z + 15.0F},
+            0.75F,
+            0.0F);
+
+        chunks_.push_back(std::move(chunk));
+    }
+
+    static void AddBuilding(
+        CityChunk& chunk,
+        Model& model,
+        BoundsXZ modelBounds,
+        Vector3 position,
+        float scale,
+        float rotation)
+    {
+        chunk.buildings.push_back({
+            &model,
+            position,
+            scale,
+            rotation,
+            TransformBounds(modelBounds, position, scale, rotation),
+        });
+    }
+
+    CityAssets& assets_;
+    int centerGridX_ = 999999;
+    int centerGridZ_ = 999999;
+    std::vector<CityChunk> chunks_;
+};
+
 void DrawTestDistrict()
 {
     DrawPlane({0.0F, 0.0F, 0.0F}, {80.0F, 80.0F}, {38, 46, 59, 255});
@@ -190,8 +501,12 @@ void DrawTestDistrict()
 
 int main()
 {
-    InitWindow(screenWidth, screenHeight, "Third-Person Cube - C++ Prototype");
+    InitWindow(screenWidth, screenHeight, "Downtown City - C++ raylib");
     SetTargetFPS(60);
+
+    CityAssets cityAssets;
+    const bool cityReady = cityAssets.Load();
+    CityWorld city(cityAssets);
 
     Player player;
     Camera3D camera{};
@@ -215,9 +530,22 @@ int main()
         if (LengthSquared(movement) > 0.0001F)
         {
             const Vector3 direction = NormalizeXZ(movement);
-            player.position.x += direction.x * moveSpeed * deltaTime;
-            player.position.z += direction.z * moveSpeed * deltaTime;
+            const Vector3 candidate{
+                player.position.x + direction.x * moveSpeed * deltaTime,
+                player.position.y,
+                player.position.z + direction.z * moveSpeed * deltaTime,
+            };
+
+            if (!cityReady || !city.Collides(candidate, playerSide * 0.46F))
+            {
+                player.position = candidate;
+            }
             player.forward = direction;
+        }
+
+        if (cityReady)
+        {
+            city.Update(player.position);
         }
 
         const Vector3 desiredCameraPosition = {
@@ -235,8 +563,17 @@ int main()
         ClearBackground({18, 27, 43, 255});
 
         BeginMode3D(camera);
-        DrawTestDistrict();
+        if (cityReady)
+        {
+            city.Draw();
+        }
+        else
+        {
+            DrawTestDistrict();
+        }
 
+        // Temporary player placeholder. Animation is intentionally postponed
+        // until the playable character asset is added.
         DrawCube(player.position, playerSide, playerSide, playerSide, {61, 166, 255, 255});
         DrawCubeWires(player.position, playerSide, playerSide, playerSide, RAYWHITE);
         const Vector3 frontMarker = {
@@ -252,22 +589,36 @@ int main()
 
         EndMode3D();
 
-        DrawRectangle(0, 0, screenWidth, 76, {7, 13, 24, 220});
-        DrawText("THIRD-PERSON CUBE", 28, 16, 24, RAYWHITE);
-        DrawText("C++ prototype  |  WASD / Arrows / on-screen buttons", 30, 46, 16, {165, 188, 214, 255});
+        DrawRectangle(0, 0, screenWidth, 92, {7, 13, 24, 225});
+        DrawText("DOWNTOWN CITY", 28, 14, 24, RAYWHITE);
+        DrawText(
+            cityReady ? "Native C++ / raylib  |  City assets loaded" : "Native C++ / raylib  |  City assets unavailable",
+            30,
+            46,
+            16,
+            cityReady ? Color{148, 221, 183, 255} : Color{255, 181, 137, 255});
         DrawText(
             TextFormat("Position  X %.1f   Z %.1f", player.position.x, player.position.z),
             30,
-            92,
+            72,
             16,
             {193, 216, 236, 255});
+        if (cityReady)
+        {
+            DrawText(
+                TextFormat("Chunks %d / 9", city.ActiveChunkCount()),
+                326,
+                72,
+                16,
+                {193, 216, 236, 255});
+        }
         DrawText("ESC to quit", screenWidth - 116, 26, 16, {165, 188, 214, 255});
 
         DrawControls(up, down, left, right);
-
         EndDrawing();
     }
 
+    cityAssets.Unload();
     CloseWindow();
     return 0;
 }
